@@ -1,4 +1,4 @@
-class Block {
+class Block extends Placeable {
   
   int type;
   int x;
@@ -10,8 +10,8 @@ class Block {
     this.y = y;
   }
   
-  void draw() {
-    pushMatrix();
+  void display(){
+  pushMatrix();
     translate(x,y);
     if (type==0) fill(0,0,0,0); // air
     if (type==1)fill(0,255,0); // grass
@@ -20,7 +20,5 @@ class Block {
     rect(0,0,50,50);
     popMatrix();
   }
-  
-  
   
 }

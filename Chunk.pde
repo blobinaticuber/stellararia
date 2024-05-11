@@ -27,7 +27,7 @@ class Chunk {
     translate(pos*chunkWidth*50,0);
     for (int i = 0; i < chunkWidth; i++) {
       for (int k = 0; k < chunkHeight; k++) {
-        blocks[i][k].draw();
+        blocks[i][k].display();
       }
     }
     popMatrix();
