@@ -20,8 +20,8 @@ class World {
   }
   
   
-  void draw() {
-    for (Chunk c: chunks) c.draw();
+  void display() {
+    for (Chunk c: chunks) c.display();
   }
   
   

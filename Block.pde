@@ -10,7 +10,7 @@ class Block {
     this.y = y;
   }
   
-  void draw() {
+  void display() {
     pushMatrix();
     translate(x,y);
     if (type==0) fill(0,0,0,0); // air
