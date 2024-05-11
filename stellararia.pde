@@ -8,7 +8,7 @@ int viewOffsetY = 0;
 
 void setup() {
   size(1920,1080);  
-  Earth = new World("Earth", 3, 100);
+  Earth = new World("Earth", 20, 100);
 }
 
 

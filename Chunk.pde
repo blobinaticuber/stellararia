@@ -12,18 +12,16 @@ class Chunk {
     chunkHeight = worldHeight;
     blocks = new Block[chunkWidth][chunkHeight];
 
-    // GARBAGE TEMPORARY WORLD GENERATION CODE:
-    // has a few blocks of air, then random grass/dirt below that
+    // noise() function gives perlin noise
     for (int i = 0; i < blocks.length; i++) {
       for (int k = 0; k < blocks[0].length; k++) {
-        float surfaceY = 10 + sin(i)*2;
-        if (k > surfaceY) {
-          blocks[i][k] = new Block(1, i*50, k*50);
-        } else {
-          blocks[i][k] = new Block(0, i*50, k*50);
-        }
-        //if (k>6) blocks[i][k] = new Block( (int)random(1, 3), i*50, k*50);
-        //else blocks[i][k] = new Block(0, i*50, k*50);
+        //surface Y is where the surface of the world is
+        float surfaceY = 20 + noise((i*0.05) + (pos*chunkWidth)) *4;
+        int type = 1;
+        if (k < surfaceY) type = 0;
+        if (k > surfaceY+1) type = 2;
+        if (k > surfaceY+8) type = 3;
+        blocks[i][k] = new Block(type, i*50, k*50);
       }
     }
   }

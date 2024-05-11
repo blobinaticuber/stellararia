@@ -16,6 +16,7 @@ class Block {
     if (type==0) fill(0,0,0,0); // air
     if (type==1)fill(0,255,0); // grass
     if (type==2) fill(128,64,0); // dirt
+    if (type==3) fill (128); // stone
     stroke(64);
     rect(0,0,50,50);
     popMatrix();
