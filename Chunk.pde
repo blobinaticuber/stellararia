@@ -16,15 +16,21 @@ class Chunk {
     // has a few blocks of air, then random grass/dirt below that
     for (int i = 0; i < blocks.length; i++) {
       for (int k = 0; k < blocks[0].length; k++) {
-        if (k>6) blocks[i][k] = new Block( (int)random(1, 3), i*50, k*50);
-        else blocks[i][k] = new Block(0, i*50, k*50);
+        float surfaceY = 10 + sin(i)*2;
+        if (k > surfaceY) {
+          blocks[i][k] = new Block(1, i*50, k*50);
+        } else {
+          blocks[i][k] = new Block(0, i*50, k*50);
+        }
+        //if (k>6) blocks[i][k] = new Block( (int)random(1, 3), i*50, k*50);
+        //else blocks[i][k] = new Block(0, i*50, k*50);
       }
     }
   }
 
   void display() {
     pushMatrix();
-    translate(pos*chunkWidth*50,0);
+    translate((pos*chunkWidth*50)+viewOffsetX,viewOffsetY);
     for (int i = 0; i < chunkWidth; i++) {
       for (int k = 0; k < chunkHeight; k++) {
         blocks[i][k].display();
