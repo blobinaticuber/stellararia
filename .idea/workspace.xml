@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f500dbfd-b85d-48a0-8ffd-15f475990fc0" name="Changes" comment="added a bunch of useful methods to player class, fixed falling, jumping is not good but will work on it and walking later" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2gL3MVSbyB6UJNtlvz9o0lzMg7f" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f500dbfd-b85d-48a0-8ffd-15f475990fc0" name="Changes" comment="" />
+      <created>1715462982964</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1715462982964</updated>
+    </task>
+    <task id="LOCAL-00001" summary="made class structure, objects use display() instead of draw()">
+      <option name="closed" value="true" />
+      <created>1715463033923</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1715463033924</updated>
+    </task>
+    <task id="LOCAL-00002" summary="made class structure, objects use display() instead of draw()">
+      <option name="closed" value="true" />
+      <created>1715463165845</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1715463165845</updated>
+    </task>
+    <task id="LOCAL-00003" summary="added a bunch of useful methods to player class, fixed falling, jumping is not good but will work on it and walking later">
+      <option name="closed" value="true" />
+      <created>1715482802423</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1715482802423</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="made class structure, objects use display() instead of draw()" />
+    <MESSAGE value="added a bunch of useful methods to player class, fixed falling, jumping is not good but will work on it and walking later" />
+    <option name="LAST_COMMIT_MESSAGE" value="added a bunch of useful methods to player class, fixed falling, jumping is not good but will work on it and walking later" />
+  </component>
+</project>

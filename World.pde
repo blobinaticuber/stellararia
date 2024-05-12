@@ -36,5 +36,26 @@ class World {
     for (Chunk c: chunks) c.display();
   }
   
+  int chunkNumCoordsAreIn(float x) {
+    //given some coordinates, this method returns the number of the chunk that the coordinates are in
+   int chunkNum = (int)(x/(Chunk.chunkWidth*BLOCK_SIZE));
+   //Chunk desired = this.chunks[chunkNum];
+   //return desired;
+   return chunkNum;
+ }
+ 
+ Chunk chunkCoordsAreIn(float x) {
+   //given some coordinates, this method returns the chunk that the coordinates are in
+   Chunk desired = this.chunks[chunkNumCoordsAreIn(x)];
+   return desired;
+ }
+ 
+ int xToChunkX(float x){
+  //this method takes any coordinates and finds the coordinates of that block in whatever chunk its in 
+  int chunkXIsIn = (int)(x/(Chunk.chunkWidth*BLOCK_SIZE));
+   int inChunkBlockXCoord = ((int)(x/BLOCK_SIZE))-chunkXIsIn*Chunk.chunkWidth;
+   return inChunkBlockXCoord;
+ }
+  
   
 }

@@ -8,6 +8,7 @@ class Player extends Entity {
  
  float xMomentum;
  float yMomentum;
+ 
  Item[] inventory = new Item[INVENTORY_SIZE];
  
  Player(int x, int y) {
@@ -15,29 +16,30 @@ class Player extends Entity {
    this.y = y;
    xMomentum = 0;
    yMomentum = 0;
+   this.moveSpeed = 5;
  }
  
- Chunk chunkPlayerIsIn() {
-   int chunkPlayerIsIn = (int)(this.x/(Chunk.chunkWidth*BLOCK_SIZE));
-   Chunk playerChunk = Earth.chunks[chunkPlayerIsIn];
-   return playerChunk;
- }
- 
- Block findBlock() {
-   //this method finds the block below the player, so that the player can stand or fall.
-   int chunkPlayerIsIn = (int)(this.x/(Chunk.chunkWidth*BLOCK_SIZE));
-   Chunk playerChunk = Earth.chunks[chunkPlayerIsIn];
-   //in-chunk x-coordinate of the block below the player:
-   int inChunkBlockX = ((int)(this.x/BLOCK_SIZE))-chunkPlayerIsIn*Chunk.chunkWidth;
-   int inChunkBlockY = (int)(this.y/BLOCK_SIZE)+2;
-   Block blockBelowPlayer = playerChunk.blocks[inChunkBlockX][inChunkBlockY];
-   //debugging
-  return blockBelowPlayer; 
+ Block[] findBlockUnderPlayer() {
+   //this method finds the 2 blocks below the player, so that the player can stand or fall.
+   
+   //this section checks the left block
+  Chunk playerChunk = Earth.chunkCoordsAreIn(this.x);
+  int inChunkBlockX = Earth.xToChunkX(this.x);
+  int inChunkBlockY = (int)(this.y/BLOCK_SIZE)+2;
+  Block blockBelowPlayerLeft = playerChunk.blocks[inChunkBlockX][inChunkBlockY];
+
+  //this section checks the right block
+  float rightx = this.x+1;
+  playerChunk = Earth.chunkCoordsAreIn(rightx);
+  inChunkBlockX = Earth.xToChunkX(rightx);
+  Block blockBelowPlayerRight = playerChunk.blocks[inChunkBlockX][inChunkBlockY];
+  Block[] LRBlocks = {blockBelowPlayerLeft,blockBelowPlayerRight};
+  return LRBlocks;
  }
  
  int findSurfaceUnderPlayer(){
-   Chunk pChunk = chunkPlayerIsIn();
-   Block temp = findBlock(); //starts out with block directly under player
+   Chunk pChunk = Earth.chunkCoordsAreIn(this.x);
+   Block temp = findBlockUnderPlayer()[0]; //starts out with block directly under player
    while(temp.type == 0){
     temp = pChunk.blocks[(temp.x)/BLOCK_SIZE][(temp.y)/BLOCK_SIZE+1];
    }
@@ -50,12 +52,17 @@ class Player extends Entity {
    y = constrain(y+yMomentum,-100,surface-100);
    yMomentum+=0.5;
    }else{
-   yMomentum = 0;
+     yMomentum = 0;
    }
  }
  
+ void movePlayer(){
+   fall();
+   x += xMomentum;
+ }
+ 
  void display() {
-   fall(); 
+   movePlayer(); 
    
    pushMatrix();
    translate(x,y);
@@ -65,7 +72,15 @@ class Player extends Entity {
  }
  
  void jump() {
-   yMomentum -= 10;
-  println("yippee!"); 
+   y -= 10;
+   yMomentum = -10;
+ }
+ 
+ void moveRight() {
+  xMomentum = moveSpeed;
+ } 
+ 
+ void moveLeft() {
+  xMomentum = -moveSpeed; 
  }
 }
