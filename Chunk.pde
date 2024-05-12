@@ -1,6 +1,6 @@
 class Chunk {
 
-  final int chunkWidth = 16;
+  final static int chunkWidth = 16;
   int chunkHeight;
   int pos;
 
@@ -22,14 +22,14 @@ class Chunk {
         if (y < surfaceY) type = 0;
         if (y > surfaceY+1) type = 2;
         if (y > surfaceY+8) type = 3;
-        blocks[x][y] = new Block(type, x*50, y*50);
+        blocks[x][y] = new Block(type, x*BLOCK_SIZE, y*BLOCK_SIZE);
       }
     }
   }
 
   void display() {
     pushMatrix();
-    translate((pos*chunkWidth*50),0);
+    translate((pos*chunkWidth*BLOCK_SIZE),0);
     for (int i = 0; i < chunkWidth; i++) {
       for (int k = 0; k < chunkHeight; k++) {
         blocks[i][k].display();

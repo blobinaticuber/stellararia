@@ -1,4 +1,4 @@
-class Block {
+class Block extends Placeable {
   
   int type;
   int x;
@@ -10,18 +10,22 @@ class Block {
     this.y = y;
   }
   
-  void display() {
-    pushMatrix();
+  void display(){
+  pushMatrix();
     translate(x,y);
-    if (type==0) fill(0,0,0,0); // air
-    if (type==1)fill(0,255,0); // grass
-    if (type==2) fill(128,64,0); // dirt
-    if (type==3) fill (128); // stone
+    switch (type){
+     case 0: fill(0,0,0,0); // air
+     break;
+     case 1: fill(0,255,0); // grass
+     break;
+     case 2:  fill(128,64,0); // dirt
+     break;
+     default: fill(300,100,100); //missing texture
+     break;
+    }
     stroke(64);
-    rect(0,0,50,50);
+    rect(0,0,BLOCK_SIZE,BLOCK_SIZE);
     popMatrix();
   }
-  
-  
   
 }

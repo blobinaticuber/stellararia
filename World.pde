@@ -23,7 +23,7 @@ class World {
     }
   }
   
-  float getSurfaceHeight(int a) {
+  float getSurfaceHeight(float a) {
     return 20 + noise(a*0.05)*15;
   }
   
