@@ -13,22 +13,23 @@ class Chunk {
     blocks = new Block[chunkWidth][chunkHeight];
 
     // noise() function gives perlin noise
-    for (int i = 0; i < blocks.length; i++) {
-      for (int k = 0; k < blocks[0].length; k++) {
+    for (int x = 0; x < blocks.length; x++) {
+      for (int y = 0; y < blocks[0].length; y++) {
         //surface Y is where the surface of the world is
-        float surfaceY = 20 + noise((i*0.05) + (pos*chunkWidth)) *4;
+        float surfaceY = 20 + noise((x+(pos*chunkWidth))*0.05)*15;
+        //float surfaceY = Earth.getSurfaceHeight(x+(pos*chunkWidth));
         int type = 1;
-        if (k < surfaceY) type = 0;
-        if (k > surfaceY+1) type = 2;
-        if (k > surfaceY+8) type = 3;
-        blocks[i][k] = new Block(type, i*50, k*50);
+        if (y < surfaceY) type = 0;
+        if (y > surfaceY+1) type = 2;
+        if (y > surfaceY+8) type = 3;
+        blocks[x][y] = new Block(type, x*50, y*50);
       }
     }
   }
 
   void display() {
     pushMatrix();
-    translate((pos*chunkWidth*50)+viewOffsetX,viewOffsetY);
+    translate((pos*chunkWidth*50),0);
     for (int i = 0; i < chunkWidth; i++) {
       for (int k = 0; k < chunkHeight; k++) {
         blocks[i][k].display();
