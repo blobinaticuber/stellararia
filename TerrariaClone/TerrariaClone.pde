@@ -47,3 +47,20 @@ void mouseDragged() {
     Steven.xMomentum = 0;
 }
  
+void mousePressed() {
+  if (mouseButton == LEFT) { //mine block
+    Block blockClicked = Earth.xyToBlock(mouseX-viewOffsetX+(Earth.WORLD_CENTER*BLOCK_SIZE),mouseY-viewOffsetY);
+    println("block mined at " + blockClicked.x + "," + blockClicked.y);
+    if (blockClicked.type != 0){
+      blockClicked.type = 0;
+    }
+  } else if (mouseButton == RIGHT) { //place block
+    Block blockClicked = Earth.xyToBlock(mouseX-viewOffsetX+(Earth.WORLD_CENTER*BLOCK_SIZE),mouseY-viewOffsetY);
+    println("block mined at " + blockClicked.x + "," + blockClicked.y);
+    if (blockClicked.type == 0){
+      blockClicked.type = 4;
+    }
+  } else {
+    println("pressed center button");
+  }
+}

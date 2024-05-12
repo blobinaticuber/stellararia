@@ -57,5 +57,12 @@ class World {
    return inChunkBlockXCoord;
  }
   
+  Block xyToBlock(float x, float y){
+   //given an x,y coordinate, this method returns the block at that coordinate.
+   Chunk chunkBlockIsIn = chunkCoordsAreIn(x);
+   int inChunkBlockXCoord = xToChunkX(x);
+   Block DesiredBlock = chunkBlockIsIn.blocks[inChunkBlockXCoord][(int)y/BLOCK_SIZE];
+   return DesiredBlock;
+  }
   
 }

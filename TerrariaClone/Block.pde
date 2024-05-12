@@ -20,6 +20,10 @@ class Block extends Placeable {
      break;
      case 2:  fill(128,64,0); // dirt
      break;
+     case 3:  fill(198,195,184); //stone
+     break;
+     case 4: fill(232,199,77); //wood
+     break;
      default: fill(300,100,100); //missing texture
      break;
     }
