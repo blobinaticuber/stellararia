@@ -21,6 +21,8 @@ void draw() {
   pushMatrix();
   translate(viewOffsetX - (Earth.WORLD_CENTER)*BLOCK_SIZE, viewOffsetY);
   Earth.display();
+  Steven.movePlayerX(); 
+  Steven.movePlayerY(); 
   Steven.display();
   popMatrix();
 }
@@ -55,11 +57,16 @@ void mousePressed() {
       blockClicked.type = 0;
     }
   } else if (mouseButton == RIGHT) { //place block
-    Block blockClicked = Earth.xyToBlock(mouseX-viewOffsetX+(Earth.WORLD_CENTER*BLOCK_SIZE),mouseY-viewOffsetY);
-    println("block mined at " + blockClicked.x + "," + blockClicked.y);
+  float adjustedX = mouseX-viewOffsetX+(Earth.WORLD_CENTER*BLOCK_SIZE);
+  float adjustedY = mouseY-viewOffsetY;
+  
+  if(!((Steven.x < adjustedX && adjustedX < Steven.x+Steven.hitboxWidth)&&(Steven.y < adjustedY && adjustedY < Steven.y+Steven.hitboxHeight))) {
+    //above line checks to make sure 
+    Block blockClicked = Earth.xyToBlock(adjustedX,adjustedY);
     if (blockClicked.type == 0){
       blockClicked.type = 4;
     }
+  }//outside of checking if block is placed inside player
   } else {
     println("pressed center button");
   }
