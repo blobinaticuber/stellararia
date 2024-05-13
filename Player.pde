@@ -1,7 +1,5 @@
 class Player extends Entity {
   final int INVENTORY_SIZE = 36;
-  final int PLAYER_HEIGHT = 100;
-  final int PLAYER_WIDTH = 50;
 
   //inherits x,y which are floats
   //x and y are the top left corner of the players hitbox
@@ -17,6 +15,8 @@ class Player extends Entity {
     xMomentum = 0;
     yMomentum = 0;
     this.moveSpeed = 5;
+    this.hitboxWidth = 45;
+    this.hitboxHeight = 90;
   }
 
   Block[] findBlockUnderPlayer() {
@@ -29,7 +29,7 @@ class Player extends Entity {
     Block blockBelowPlayerLeft = playerChunk.blocks[inChunkBlockX][inChunkBlockY];
 
     //this section checks the right block
-    float rightx = this.x+1;
+    float rightx = this.x+hitboxWidth;
     playerChunk = Earth.chunkCoordsAreIn(rightx);
     inChunkBlockX = Earth.xToChunkX(rightx);
     Block blockBelowPlayerRight = playerChunk.blocks[inChunkBlockX][inChunkBlockY];
@@ -39,41 +39,65 @@ class Player extends Entity {
 
   int findSurfaceUnderPlayer() {
     Chunk pChunk = Earth.chunkCoordsAreIn(this.x);
-    Block temp = findBlockUnderPlayer()[0]; //starts out with block directly under player
-    while (temp.type == 0) {
-      temp = pChunk.blocks[(temp.x)/BLOCK_SIZE][(temp.y)/BLOCK_SIZE+1];
+    Block[] temp = findBlockUnderPlayer(); //starts out with blocks directly under player
+    //0 is left, 1 is right
+    int surfaceY = -1;
+
+    while (surfaceY == -1) {
+
+      //left block
+      if (temp[0].type != 0) {
+        surfaceY = temp[0].y;
+        break;
+      }
+      temp[0] = pChunk.blocks[(temp[0].x)/BLOCK_SIZE][(temp[0].y)/BLOCK_SIZE+1];
+
+      //right block
+      if (temp[1].type != 0) {
+        surfaceY = temp[1].y;
+        break;
+      }
+      temp[1] = pChunk.blocks[(temp[1].x)/BLOCK_SIZE][(temp[1].y)/BLOCK_SIZE+1];
     }
-    return temp.y;
+    return surfaceY;
   }
 
-  void fall() {
+  void movePlayerY() {
     int surface = findSurfaceUnderPlayer();
-    if (this.y < surface) {
-      y = constrain(y+yMomentum, -100, surface-100);
-      yMomentum+=0.5;
+    if (this.y+100 < surface) {
+      float potentialy = constrain(y+yMomentum, 0, surface-100);
+      if (Earth.xyToBlock(x, potentialy).type == 0) {
+        y = potentialy;
+        yMomentum+=0.5;
+      } else {
+        yMomentum = 0;
+      }
     } else {
       yMomentum = 0;
     }
   }
 
-  void movePlayer() {
-    fall();
-    x += xMomentum;
+  void movePlayerX() {
+    float potentialx = x+xMomentum;
+    if (Earth.xyToBlock(potentialx, y+hitboxHeight).type == 0 && Earth.xyToBlock(potentialx, y).type == 0) {
+      if (Earth.xyToBlock(potentialx+hitboxWidth, y+hitboxHeight).type == 0 && Earth.xyToBlock(potentialx+hitboxWidth, y).type == 0) {
+        x = potentialx;
+      }
+    }
   }
 
-  void display() {
-    movePlayer();
 
+
+  void display() {
     pushMatrix();
     translate(x, y);
     fill(128, 0, 128);
-    rect(0, 0, PLAYER_WIDTH, PLAYER_HEIGHT);
+    rect(0, 10, hitboxWidth, hitboxHeight);
     popMatrix();
   }
 
   void jump() {
-    // do not jump if blocks under player is air
-    if (!(findBlockUnderPlayer()[0].type == 0 && findBlockUnderPlayer()[1].type == 0)) {
+    if (this.y+100 == findSurfaceUnderPlayer()) { //so player cannot jump midair
       y -= 10;
       yMomentum = -10;
     }

@@ -23,16 +23,15 @@ void draw() {
   background(bg);
   pushMatrix();
   translate(viewOffsetX - (Earth.WORLD_CENTER)*BLOCK_SIZE, viewOffsetY);
-  //println(Steven.x);
-  //translate(Steven.x/BLOCK_SIZE - (Earth.WORLD_CENTER)*BLOCK_SIZE, viewOffsetY);
-  //translate(viewOffsetX - Steven.x, viewOffsetY);
-  Steven.display();
   Earth.display();
-  
+  Steven.movePlayerX();
+  Steven.movePlayerY();
+  Steven.display();
   popMatrix();
 }
 
 void mouseDragged() {
+  // change camera dragging to middle button only
   if (mouseButton != LEFT && mouseButton != RIGHT) {
     viewOffsetX -= ((pmouseX-mouseX));
     viewOffsetY -= ((pmouseY-mouseY));
@@ -64,12 +63,15 @@ void mousePressed() {
       blockClicked.type = 0;
     }
   } else if (mouseButton == RIGHT) { //place block
-    Block blockClicked = Earth.xyToBlock(mouseX-viewOffsetX+(Earth.WORLD_CENTER*BLOCK_SIZE), mouseY-viewOffsetY);
-    println("block mined at " + blockClicked.x + "," + blockClicked.y);
-    if (blockClicked.type == 0) {
-      blockClicked.type = 4;
-    }
-  } else {
-    println("pressed center button");
+    float adjustedX = mouseX-viewOffsetX+(Earth.WORLD_CENTER*BLOCK_SIZE);
+    float adjustedY = mouseY-viewOffsetY;
+
+    if (!((Steven.x < adjustedX && adjustedX < Steven.x+Steven.hitboxWidth)&&(Steven.y < adjustedY && adjustedY < Steven.y+Steven.hitboxHeight))) {
+      //above line checks to make sure
+      Block blockClicked = Earth.xyToBlock(adjustedX, adjustedY);
+      if (blockClicked.type == 0) {
+        blockClicked.type = 4;
+      }
+    }//outside of checking if block is placed inside player
   }
 }
