@@ -27,7 +27,7 @@ class Block extends Placeable {
      default: fill(300,100,100); //missing texture
      break;
     }
-    stroke(64);
+    stroke(0,0,0,0);
     rect(0,0,BLOCK_SIZE,BLOCK_SIZE);
     popMatrix();
   }
