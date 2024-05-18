@@ -6,16 +6,24 @@ Player Steven;
 
 int viewOffsetX = 0;
 int viewOffsetY = 0;
-final int BLOCK_SIZE = 50;
+final int BLOCK_SIZE = 48;
 
 PImage bg;
+PImage dirt;
+PImage grass;
+PImage stone;
+PImage stoneBrick;
 
 void setup() {
   rectMode(CORNER);
   size(1920, 1080);
   Earth = new World("Earth", 20, 100);
   Steven = new Player((Earth.WORLD_CENTER)*BLOCK_SIZE, 200);
-  bg = loadImage("Earth_day_bg.png");
+  bg = loadImage("images/Earth_day_bg.png");
+  dirt = loadImage("images/dirt.png");
+  grass = loadImage("images/grass.png");
+  stone = loadImage("images/stone.png");
+  stoneBrick = loadImage("images/stoneBrick.png");
 }
 
 
